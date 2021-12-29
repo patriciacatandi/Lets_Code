@@ -71,20 +71,67 @@ d) O produto escalar $$\overrightarrow{u} \cdot \overrightarrow{v} = u_1 v_1 + u
 >>> u * v
 array([4489, 62500, 4])
 ```
-e) O módulo (Euclidiando) é calculado: $$| \overrightarrow{u} |= \sqrt{u_1^2 + u_2^2 + \ldots + u_n^2}$$
+e) Podemos calcular o módulo (Euclidiando) do vetor: $$| \overrightarrow{u} |= \sqrt{u_1^2 + u_2^2 + \ldots + u_n^2}$$
+Na próxima seção apresentaremos outras funções para determinar a maginitude do vetor.
+
+Em resumo, vetores são objetos especiais que obedecem esses axiomas de soma e multiplicação por escalares. Qualquer objeto que satisfaça essas propriedades pode ser considerado um vetor. Exemplos de vetores são: polinômios, matrizes, sinais de aúdio e uma tupla com elementos de $$\mathbb{R}^n$$. 
+
+## Norma de vetores
+Vetores também podem representar uma determinada magnitude e direção. Essa magnitude do vetor pode ser obtida através de uma classe de funções denominadas normas que calculam a distância que o vetor encontra-se da origem. Em Machine Learning, as normas são muito utilizadas para calcular o erro da predição dos modelos. Aqui vamos apresentar como calcular as normas mais utilizadas para isso.
+
+### Norma $$L^2$$
+Ela também é conhecida como norma Euclidiana por calcular a distância simples da origem. Como mencionado anteriormente, essa é a norma mais conhecida e é descrita por:
+$$||\mathbf{v}||_2  = \sqrt{\sum v_i^2} = \sqrt{v_1^2 + v_2^2 + \ldots + v_n^2}$$ 
+
+Muitas vezes ela é representada sem o subscrito $$||\mathbf{v}||$$. Em Python podemos calcular a norma por vias normais:
+
 ```python
 >>> np.sqrt(u[0]**2 + u[1]**2 + u[2]**2)
 258.53006007
 ```
-Podemos utilizar o método [np.linalg.norm()](https://numpy.org/doc/stable/reference/generated/numpy.linalg.norm.html) do numpy, no qual o primeiro parâmetro é o vetor que estamos tratando e o segundo é a ordem da norma:
+ou utilizar o método [np.linalg.norm()](https://numpy.org/doc/stable/reference/generated/numpy.linalg.norm.html) do numpy, no qual o primeiro parâmetro é o vetor que estamos tratando e o segundo é a ordem da norma:
 ```python
 >>> np.linalg.norm(u, 2)
 258.53006007
 ```
 Esse módulo é conhecido como Norma $$L^2$$ e é representado matematicamente por $$||\mathbf{v}||_2$$. Essa á norma mais utilizada em Machine Learning.
 
-Em resumo, vetores são objetos especiais que obedecem esses axiomas de soma e multiplicação por escalares. Qualquer objeto que satisfaça essas propriedades pode ser considerado um vetor. Exemplos de vetores são: polinômios, matrizes, sinais de aúdio e uma tupla com elementos de $$\mathbb{R}^n$$. 
+### Norma $$L^1$$
+Na Norma $$L^1$$, somamos o valor absoluto de cada um dos elementos do vetor:
+$$||\mathbf{v}||_1  = \sum |v_i| = |v_1| + |v_2| + \ldots + |v_n|$$ 
 
+```python
+>>> np.abs(u[0]) + np.abs(u[1]) + np.abs(u[2])
+32
+# Com o método np.linalg.norm()
+>>> np.linalg.norm(u, 1)
+32
+```
+Como esperado, a norma $$L^1$$ resulta em um tamanho de vetor diferente da $$L^2$$.
+Outro ponto importante é que, ao contrário da norma $$L^2$$, essa função varia linearmente em todos os pontos do espaço, esteja ele próximo ou distante da origem.
+
+### Norma $$L^2_2$$
+Ela é muito parecida com a norma $$L^2$$, mas nesse caso não extraimos a raiz quadrada após a soma:
+$$||\mathbf{v}||_2^2  = {\sum v_i^2} = {v_1^2 + v_2^2 + \ldots + v_n^2}$$ 
+```python
+>>> u[0]**2 + u[1]**2 + u[2]**2
+654
+# Com o método np.linalg.norm()
+>>> np.linalg.norm(u, 2)**2
+654
+```
+A vantagem de usar a norma $$L^2_2$$ é que ela é computacionalmente mais rápida de se calcular, em compensação, ela cresce muito devagar para valores próximos a origem enquanto para valores distantes ela cresce rapidamente.
+
+### Norma infinito ou norma do máximo
+Retorna o valor absoluto máximo :
+$$||\mathbf{v}||_{\infty}  = max_i |v_i| = max(|v_1|, |v_2|, \ldots, |v_n|)$$ 
+```python
+>>> np.max(np.abs(u))
+25
+# Com o método np.linalg.norm()
+>>> np.linalg.norm(u,  np.inf)
+25
+```
 
 ## Espaço vetorial (ou espaço linear)
 Um espaço vetorial é uma estrutura matemática constituída por um conjunto $$V$$ não vazio, cujos elementos são chamados vetores. Nesse espaço, estão definidas as operações de soma e de multiplicação por escalar (números reais) que devem obedecer  oito regras (axiomas) para ser considerado um espaço vetorial. 
@@ -239,5 +286,34 @@ Como podemos observar do exemplo acima, a ordem de multiplicação entre as matr
 array([[ 2,  3,  8],
       [36, 25,  6]])
 ```
+
+## Exercícios
+(UFMT) Uma empresa fabrica três produtos. Suas despesas de produção estão divididas em três categorias. Em cada uma dessas categorias, faz-se uma estimativa do custo de produção de um único exemplar de cada produto. Faz-se, também, uma estimativa da quantidade de cada produto a ser fabricado por trimestre. Essas estimativas são dadas na **tabela 1** e na **tabela 2**. A empresa gostaria de apresentar a seus acionistas uma única tabela mostrando o custo total por **trimestre** de cada uma das três categorias: **matéria- prima**, **pessoal** e **despesas gerais**.
+
+*Tabela 3. Custo de Produção por Item (em reais)*
+|**Gastos**     |**Produto A**|**Produto B**|**Produto C**|
+|:-------------:|:-----------:|:-----------:|:-----------:|
+|Matéria-prima  |0.10         |0.30         |0.15         |
+|Pessoal        |0.30         |0.40         |0.25         |
+|Despesas-gerais|0.10         |0.20         |0.15         |
+
+*Tabela 4. Quantidade Produzida por Trimestre*
+|**Produto**|**Verão**|**Outono**|**Inverno**|**Primavera**|
+|:---------:|:-------:|:--------:|:---------:|:-----------:|
+|A          |4000     |4500      |4500       |4000         |
+|B          |2000     |2600      |2400       |2200         |
+|C          |5800     |6200      |6000       |6000         |
+
+*Resposta*
+Você deve obter uma matriz cujas linhas representam as categorias e as colunas os trimestres e que tenham os valores abaixo:
+
+| **Custos por Categoria por Trimeste**|**Verão** | **Outono** | **Inverno**| **Primavera** |
+|:---------------------------------:|:-------:|:--------:|:---------:|:-----------:|
+| Matéria-prima                      |1870     |2160      |2070       |1960    |
+| Pessoal                            |3450     |3940      |3810       |3580    |
+| Despesas Gerais                    |1670     |1900      |1830       |1740    |
+
+
+
 
 
