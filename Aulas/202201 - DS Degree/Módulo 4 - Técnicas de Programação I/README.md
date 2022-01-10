@@ -9,7 +9,7 @@ Ao final de cada aula teremos exercícios que devem ser realizados em grupo. A p
 Os alunos são livres para tirar dúvidas ao longo da aula. <br>
 (?) Gravação das aulas
 
-## Avaliação
+## Avaliação feita pelos professores
 1 - Avaliação por rubrica: 
   * Softskills 
   * Hardskills.
@@ -23,6 +23,10 @@ Os alunos são livres para tirar dúvidas ao longo da aula. <br>
  - [03] O aluno é capaz de aplicar os conceitos em problemas de escopo fechado (que trabalham especificamente esse conceito), mas ainda tem dificuldade em aplicá-lo em problemas de escopo aberto ou de forma autônoma
  - [04] O aluno é capaz de aplicar os conceitos em problemas de escopo fechado e em problemas de escopo aberto de forma autônoma
 
+
+## Avaliação feita pelos alunos
+1 - [Espaço](https://forms.gle/tShxhxNYhvi6ZmQm8) anônimo para vocês deixarem suas sugestões e\ou críticas a qualquer momento. <br>
+2 - Avaliação geral feita pela LC. O link é disponibilizado nas últimas aulas.
 
 2 - Projeto em grupo a ser apresentado na penúltima aula.
 
