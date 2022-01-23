@@ -1,0 +1,1 @@
+git ls-files --deleted -z | git update-index --assume-unchanged -z --stdin
